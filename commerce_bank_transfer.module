@@ -49,66 +49,66 @@ function commerce_bank_transfer_settings_form($settings = NULL) {
     '#type' => 'textfield',
     '#title' => t('Account name'),
     '#description' => t('Name associated with bank account.'),
-    '#default_value' => $settings['details']['account_name'], // TODO how do i18n_variables work in D7? this should be one of them..
+    '#default_value' => isset($settings['details']['account_name']) ? $settings['details']['account_name'] : '', // TODO how do i18n_variables work in D7? this should be one of them..
     '#required' => FALSE,
   );
   $form['details']['account_number'] = array(
     '#type' => 'textfield',
     '#title' => t('Account number'),
-    '#default_value' => $settings['details']['account_number'],
+    '#default_value' => isset($settings['details']['account_number']) ? $settings['details']['account_number'] : '',
     '#required' => FALSE,
   );
   $form['details']['account_iban'] = array(
     '#type' => 'textfield',
     '#title' => t('IBAN'),
     '#description' => t('International Bank Account Number'),
-    '#default_value' => $settings['details']['account_iban'],
+    '#default_value' => isset($settings['details']['account_iban']) ? $settings['details']['account_iban'] : '',
     '#required' => FALSE,
   );
   $form['details']['bank_code_appellation'] = array(
     '#type' => 'textfield',
     '#title' => t('Bank code appellation'),
     '#description' => t('Appellation of bank code - depending on where your bank is located you should set this to: "BSB" (AU), "Sort code" (UK), "Bank code" (DE), "Clearing number" (CH), "Routing transit number" (US) or "Bank transit number" (CA)'),
-    '#default_value' => $settings['details']['bank_code_appellation'],
+    '#default_value' => isset($settings['details']['bank_code_appellation']) ? $settings['details']['bank_code_appellation'] : '',
     '#required' => FALSE,
   );
   $form['details']['bank_code'] = array(
     '#type' => 'textfield',
     '#title' => t('Bank code'),
     '#description' => t('Actual bank code, will be shown with appellation set above'),
-    '#default_value' => $settings['details']['bank_code'],
+    '#default_value' => isset($settings['details']['bank_code']) ? $settings['details']['bank_code'] : '',
     '#required' => FALSE,
   );
   $form['details']['account_swift'] = array(
     '#type' => 'textfield',
     '#title' => t('SWIFT'),
     '#description' => t('SWIFT-Code (aka BIC = Bank Identifier Code)'),
-    '#default_value' => $settings['details']['account_swift'],
+    '#default_value' => isset($settings['details']['account_swift']) ? $settings['details']['account_swift'] : '',
     '#required' => FALSE,
   );
   $form['details']['account_bank'] = array(
     '#type' => 'textfield',
     '#title' => t('Banking institution'),
-    '#default_value' => $settings['details']['account_bank'],
+    '#default_value' => isset($settings['details']['account_bank']) ? $settings['details']['account_bank'] : '',
     '#required' => FALSE,
   );
   $form['details']['account_branch'] = array(
     '#type' => 'textfield',
     '#title' => t('Branch office'),
-    '#default_value' => $settings['details']['account_branch'],
+    '#default_value' => isset($settings['details']['account_branch']) ? $settings['details']['account_branch'] : '',
     '#required' => FALSE,
   );
   $form['subject_oid'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display "Reason for payment: order number <i>[order ID]</i>"'),
     '#description' => t('Note: with this option enabled the details cannot be displayed on the checkout page (only later).'), // TODO update to new mechanism and terminology
-    '#default_value' => $settings['subject_oid'],
+    '#default_value' => isset($settings['subject_oid']) ? $settings['subject_oid'] : 0,
   );
   $form['policy'] = array(
     '#type' => 'textarea',
     '#title' => t('Payment instructions'),
     '#description' => t('Instructions for customers on the checkout page. Use &lt;br /&gt; for line break.'),
-    '#default_value' => $settings['policy'],
+    '#default_value' => isset($settings['policy']) ? $settings['policy'] : '',
     '#required' => FALSE,
     '#rows' => 3,
   );
