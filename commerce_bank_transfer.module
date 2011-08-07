@@ -67,11 +67,11 @@ function commerce_bank_transfer_settings_form($settings = NULL) {
     '#collapsible' => TRUE,
     '#collapsed' => FALSE,
   );
-  $form['details']['account_name'] = array(
+  $form['details']['account_owner'] = array(
     '#type' => 'textfield',
-    '#title' => t('Account name'),
+    '#title' => t('Account owner'),
     '#description' => t('Name associated with bank account.'),
-    '#default_value' => isset($settings['details']['account_name']) ? $settings['details']['account_name'] : '', // TODO how do i18n_variables work in D7? this should be one of them..
+    '#default_value' => isset($settings['details']['account_owner']) ? $settings['details']['account_owner'] : '', // TODO how do i18n_variables work in D7? this should be one of them..
     '#required' => FALSE,
   );
   $form['details']['account_number'] = array(
@@ -151,7 +151,7 @@ function commerce_bank_transfer_submit_form($payment_method, $pane_values, $chec
 
   $form['bank_details'] = array(
   // TODO add message about details will be in email.. but email and token not yet done..
-    '#markup' => '<p><strong>' . t('Please make payment to:') . '</strong><br />' . t('Account owner') . ': ' . commerce_bank_transfer_bank_details($order->order_id, $payment_method) . '</p>',
+    '#markup' => '<p><strong>' . t('Please make payment to:') . '</strong><br />' . commerce_bank_transfer_bank_details($order->order_id, $payment_method) . '</p>',
   // TODO "Account owner" was/is the infamouse "To" in uc_bank_transfer depending on how the online and email invoice is looking we can move "Account owner" into commerce_bank_transfer_bank_details()
   // TODO in uc_bank_transfer we sent the details through a theming function - should we still do this?
   );
@@ -193,8 +193,8 @@ function commerce_bank_transfer_transaction($payment_method, $order, $charge) {
  * $oid = order ID
  */
 function commerce_bank_transfer_bank_details($oid, $pm) {
-  if ($pm['settings']['details']['account_name'] <> '') {
-    $bank_info[] = $pm['settings']['details']['account_name'];
+  if ($pm['settings']['details']['account_owner'] <> '') {
+    $bank_info[] = t('Account owner') . ': ' . $pm['settings']['details']['account_owner'];
   }
   if ($pm['settings']['details']['account_number'] <> '') {
     $bank_info[] = t('Account number') . ': ' . $pm['settings']['details']['account_number'];
